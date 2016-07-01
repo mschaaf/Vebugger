@@ -37,6 +37,7 @@ endfunction
 
 function! vebugger#jdb#_readProgramOutput(pipeName,line,readResult,debugger) dict
 	if 'out'==a:pipeName
+                echom a:line
 		if a:line=~'\v^\> \>'
 					\||a:line=='> '
 					\||a:line=~'\v^Step completed'
