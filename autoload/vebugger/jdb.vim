@@ -10,8 +10,9 @@ function! vebugger#jdb#start(entryClass,args)
 	endif
 	let l:debugger.state.jdb.filesToClassesMap={}
 
-	call l:debugger.writeLine('stop on '.a:entryClass.'.main')
-	call l:debugger.writeLine('run  '.a:entryClass.' '.vebugger#util#commandLineArgsForProgram(a:args))
+        " call l:debugger.writeLine('stop on '.a:entryClass.'.main')
+        " call l:debugger.writeLine('run  '.a:entryClass.' '.vebugger#util#commandLineArgsForProgram(a:args))
+        call l:debugger.writeLine('run')
 	call l:debugger.writeLine('monitor where')
 	if !has('win32')
 		call vebugger#std#openShellBuffer(l:debugger)
