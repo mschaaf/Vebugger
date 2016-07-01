@@ -13,7 +13,7 @@ function! vebugger#jdb#start(entryClass,args)
         " call l:debugger.writeLine('stop on '.a:entryClass.'.main')
         " call l:debugger.writeLine('run  '.a:entryClass.' '.vebugger#util#commandLineArgsForProgram(a:args))
         call l:debugger.writeLine('run')
-"	call l:debugger.writeLine('monitor where')
+	call l:debugger.writeLine('monitor where')
 	if !has('win32')
 		call vebugger#std#openShellBuffer(l:debugger)
 	endif
@@ -44,6 +44,7 @@ function! vebugger#jdb#_readProgramOutput(pipeName,line,readResult,debugger) dic
 					\||a:line=~'\v^\> Deferring breakpoint'
 					\||a:line=='Nothing suspended.'
 					\||a:line=~'\v^\> run  ' "Signs that the output finished
+					\||a:line=='\v^main[.*] '
 			let self.programOutputMode=0
 		elseif a:line=~'\v(step|step up|next|cont)$' "Next line should be output
 			let self.programOutputMode=1
