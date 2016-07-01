@@ -1,6 +1,7 @@
 function! vebugger#jdb#start(entryClass,args)
-	let l:debugger=vebugger#std#startDebugger(shellescape(vebugger#util#getToolFullPath('jdb',get(a:args,'version'),'jdb'))
-				\.(has_key(a:args,'classpath') ? ' -classpath '.fnameescape(a:args.classpath) : ''))
+	let l:debugger=vebugger#std#startDebugger(shellescape(vebugger#util#getToolFullPath('/home/ms/progs/jdk1.8/bin/jdb',get(a:args,'version'),'/home/ms/progs/jdk1.8/bin/jdb'))
+				\.(has_key(a:args,'classpath') ? ' -classpath '.fnameescape(a:args.classpath) : '')
+				\.(has_key(a:args,'attach') ? ' -attach '.fnameescape(a:args.attach) : ''))
 	let l:debugger.state.jdb={}
 	if has_key(a:args,'srcpath')
 		let l:debugger.state.jdb.srcpath=a:args.srcpath
@@ -35,6 +36,7 @@ endfunction
 
 function! vebugger#jdb#_readProgramOutput(pipeName,line,readResult,debugger) dict
 	if 'out'==a:pipeName
+                echo a:line
 		if a:line=~'\v^\> \>'
 					\||a:line=='> '
 					\||a:line=~'\v^Step completed'
