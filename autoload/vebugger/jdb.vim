@@ -37,15 +37,17 @@ endfunction
 
 function! vebugger#jdb#_readProgramOutput(pipeName,line,readResult,debugger) dict
 	if 'out'==a:pipeName
+                echom "bla"
                 echom a:line
+                echom "bla2"
 		if a:line=~'\v^\> \>'
 					\||a:line=='> '
 					\||a:line=~'\v^Step completed'
 					\||a:line=~'\v^Breakpoint hit'
 					\||a:line=~'\v^\> Deferring breakpoint'
 					\||a:line=='Nothing suspended.'
-					\||a:line=~'\v^\> run  ' "Signs that the output finished
 					\||a:line=='\v^main[.*] '
+					\||a:line=~'\v^\> run  ' "Signs that the output finished
 			let self.programOutputMode=0
 		elseif a:line=~'\v(step|step up|next|cont)$' "Next line should be output
 			let self.programOutputMode=1
